@@ -70,11 +70,11 @@
     "gate_version": "1.4.0",
     "result": "PASSED"
   },
-  "record_sha256": "5188fde8962eef0ef8078c873296e3db4255b1634f4786dc77585475fbfe8c0d",
+  "record_sha256": "91b35ad61e28fd67fd6bdea540595c6723b1ed2a7dd2d3588dd442b448646acd",
   "release_date": "2026-10-22",
   "release_tag": "v2026.10",
   "schema_version": 1,
-  "site_revision": 3,
+  "site_revision": 4,
   "source": {
     "name": "Transportation Safety Board of Canada - Rail Occurrence Database System (RODS), 'Rail transportation occurrence data from January 1983' (RODSdb public CSVs)",
     "url": "https://www.tsb.gc.ca/eng/stats/rail/data-5.html"
