@@ -1,0 +1,143 @@
+{
+  "artifact_version": "e75a59bb1116e39b980c9fa2f5ea7c2b984fa6ccce4b3286f194de69d2b32309",
+  "assets": {
+    "meta.json": {
+      "bytes": 2606,
+      "download": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/download/v2026.10/meta.json",
+      "hf_path": "meta.json",
+      "sha256": "5f3852f3150cd808a1f58b7aa7f77c932ef315bb857628c6eff56a4530f06381"
+    },
+    "private-holdout.csv": {
+      "bytes": 244586,
+      "download": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/download/v2026.10/private-holdout.csv",
+      "hf_path": "data/private-holdout.csv",
+      "sha256": "b00bf00bd4f918ce434b9821535669d465c9a63bab53b21f90f187f4c33c0ac4"
+    },
+    "public-eval.csv": {
+      "bytes": 474335,
+      "download": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/download/v2026.10/public-eval.csv",
+      "hf_path": "data/public-eval.csv",
+      "sha256": "2f1dcafb6cc701b1427a74d1969733f290ed6de030ed849a6988dcab31722a0d"
+    },
+    "public-train.csv": {
+      "bytes": 980529,
+      "download": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/download/v2026.10/public-train.csv",
+      "hf_path": "data/public-train.csv",
+      "sha256": "4a032f68c4ad944a0b5d6ef96a904d4d13f3c3eb8b228e2fa74c3174b8054e94"
+    },
+    "quality.json": {
+      "bytes": 7131,
+      "download": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/download/v2026.10/quality.json",
+      "hf_path": "quality.json",
+      "sha256": "a7343bd15a119c67f2ef79ba5b10f5414a6ef406fdeeb81772b22ba1bccf3789"
+    }
+  },
+  "baseline": {
+    "metrics": {
+      "Evaluation ROC AUC": 0.8126
+    },
+    "scope": "baseline only, through the runner's own contract. No agent or harness comparison was run, and none is implied."
+  },
+  "configs": [],
+  "dataset": "tsb-railway-occurrence-casualty",
+  "domain": "Transport safety",
+  "github_repository": "earino/tsb-railway-occurrence-casualty",
+  "hf_repository": "earino/tsb-railway-occurrence-casualty",
+  "licenses": {
+    "attribution": "Transportation Safety Board of Canada, Rail Occurrence Database System (RODS), rail transportation occurrence data from January 1983 (https://www.tsb.gc.ca/eng/stats/rail/data-5.html), vintage of 2026-10-21. Contains information licensed under the Open Government Licence - Canada.",
+    "citation": "Transportation Safety Board of Canada. Rail transportation occurrence data from January 1983 (RODSdb public tables). Gatineau: TSB, republished on or soon after the 15th of each month. Licensed under the Open Government Licence - Canada 2.0. Derived dataset: TSB railway occurrence casualty prediction task (not a TSB official product).",
+    "code": "MIT",
+    "compilation_scope": "Our contribution - the occurrence-level row selection, the derived casualty label, the coordinate decode of the publisher's three mixed encodings, the temporal partition, the feature derivations and the packaging - is dedicated to the public domain under CC0-1.0. The dedication covers only our contribution: the underlying TSB RODS data keep their own designation and remain subject to OGL-Canada 2.0, whose attribution condition carries through to every copy of the derived data. Nothing here relicenses the source or presents CC0 as the source's terms.",
+    "data_compilation": "CC0-1.0",
+    "source_data": "OGL-CA-2.0"
+  },
+  "limitations": [
+    "A derived research dataset from the TSB's RODSdb, under the Open Government Licence - Canada 2.0; the compilation is CC0 with the source attribution carried, and it is not an official TSB product.",
+    "The panel begins in 2016 because that is where the publisher's activity taxonomy stabilises; earlier occurrences use different codes and are excluded rather than silently merged. 56,865 pre-panel records and 109 post-window records are excluded, with counts recorded.",
+    "Positives are 11-14% of rows and cluster within a small number of occurrence types, so AUC is the honest score and accuracy is not.",
+    "The holdout is labelled and ships with the release. Keep its labels outside an evaluated agent's workspace.",
+    "The source is a live register; a later rebuild will not reproduce these bytes, which is why the artifact version is pinned in the manifest.",
+    "No claim of real-time or operational forecasting validity; historical availability at the prediction instant is assumed, not vintage-verified.",
+    "The labeled eval split is development/validation. Final holdout scoring requires prediction-time access restrictions; the original scorer provided the complete feature frame. Downloadable holdout labels must stay outside model development."
+  ],
+  "post": {
+    "paragraphs": [
+      "This release packages 13,732 recorded railway occurrences between January 2016 and August 2026, with temporal train, validation and holdout splits. Occurrence onset is the intended prediction instant, but the source is a later register snapshot: this release does not establish that each recorded context field was known at onset.",
+      "The label is the occurrence's injury outcome: at least one casualty, 11.1% of train rows, 12.1% of eval, 14.1% of holdout. It is drawn from the injury totals and corroborated against the separate injuries table, which agreed on all 1,624 positives.",
+      "The recorded XGBoost baseline achieved 0.8126 validation AUC under the original runner protocol, compared with a tested activity-type rule at 0.707 and a persistence-style reference at 0.527. These comparisons describe the tested references and protocol; they do not establish historical feature availability or optimal-model headroom."
+    ],
+    "title": "A casualty-prediction task from Canada's rail occurrence record"
+  },
+  "qualification": {
+    "gate_version": "1.4.0",
+    "result": "PASSED"
+  },
+  "record_sha256": "5ba71195ad34ca60e26384614c4c5d2031b1ef3ecbeb830ffb03d8a41ad3c521",
+  "release_date": "2026-10-22",
+  "release_tag": "v2026.10",
+  "schema_version": 1,
+  "site_revision": 5,
+  "source": {
+    "name": "Transportation Safety Board of Canada - Rail Occurrence Database System (RODS), 'Rail transportation occurrence data from January 1983' (RODSdb public CSVs)",
+    "url": "https://www.tsb.gc.ca/eng/stats/rail/data-5.html"
+  },
+  "splits": {
+    "eval": {
+      "positives": 463,
+      "rows": 3831
+    },
+    "holdout": {
+      "positives": 278,
+      "rows": 1976
+    },
+    "train": {
+      "positives": 883,
+      "rows": 7925
+    }
+  },
+  "suitability": {
+    "artifact_version": "e75a59bb1116e39b980c9fa2f5ea7c2b984fa6ccce4b3286f194de69d2b32309",
+    "corrections": [],
+    "cross_row_audit": {
+      "scope": "Bounded attack search, 15 active minutes per repository, frozen plan; not a security proof Holdout recovery was not tested by this audit.",
+      "status": "bounded_no_recovery"
+    },
+    "dataset": "tsb-railway-occurrence-casualty",
+    "decision": "retain_restricted",
+    "evaluation_access": "chronological",
+    "historical_availability": "assumed",
+    "limitations": [
+      "The bounded leakage audit found no recovery path (0 covered by any tested join); a bounded search is not a proof. One calendar week straddles train/eval (5 eval rows).",
+      "Historical feature/label availability at the declared prediction instant is assumed from current snapshots, not verified against release vintages.",
+      "The current scorer passes the complete feature frame to predict_proba; prediction-time isolation is instructed but not mechanically enforced.",
+      "Features come from a finalized occurrence register; excluding outcome taxonomy does not prove each retained contextual field was available at occurrence onset."
+    ],
+    "release_tag": "v2026.10",
+    "reviewed_on": "2026-10-24",
+    "schema_version": 1,
+    "selection": "unverified",
+    "summary": "Retained for retrospective model-development research with documented timing limitations. No answer recovery was found in the bounded audit; historical forecasting validity remains unverified.",
+    "supported_uses": [
+      "Retrospective train/validation model-development experiments under the documented timing and selection limitations",
+      "Final evaluation only under a protocol that isolates holdout data from development and prevents later rows influencing earlier predictions"
+    ],
+    "training_label_timing": "unverified",
+    "unsupported_uses": [
+      "Claims of verified real-time or operational forecasting validity",
+      "Treating development/validation scores as untouched final-test results"
+    ],
+    "vintage": "current_snapshot"
+  },
+  "summary": "Retrospective casualty classification from recorded railway-occurrence context: 13,732 occurrences from Canada's Transportation Safety Board. Availability of these fields at occurrence onset is unverified.",
+  "task_type": "binary-classification",
+  "title": "TSB railway occurrence casualty",
+  "urls": {
+    "catalog": "https://earino.github.io/dataset-factory-site/",
+    "github": "https://github.com/earino/tsb-railway-occurrence-casualty",
+    "github_release": "https://github.com/earino/tsb-railway-occurrence-casualty/releases/tag/v2026.10",
+    "huggingface": "https://huggingface.co/datasets/earino/tsb-railway-occurrence-casualty",
+    "huggingface_version": "https://huggingface.co/datasets/earino/tsb-railway-occurrence-casualty/tree/v2026.10",
+    "version": "https://earino.github.io/tsb-railway-occurrence-casualty/versions/v2026.10/",
+    "website": "https://earino.github.io/tsb-railway-occurrence-casualty/"
+  }
+}
